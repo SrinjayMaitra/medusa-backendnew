@@ -21,8 +21,12 @@ ENV NODE_ENV=production
 # Build the application
 RUN npm run build
 
-# Verify admin build output exists (allow build to continue even if admin files not found)
-RUN ls -la .medusa/server/public/ 2>/dev/null || echo "Admin build directory not found - this is OK if no admin customizations"
+# Debug: Check what was built
+RUN echo "=== Checking build output ===" && \
+    ls -la .medusa/ 2>/dev/null || echo ".medusa directory not found" && \
+    ls -la .medusa/server/ 2>/dev/null || echo ".medusa/server not found" && \
+    ls -la .medusa/server/public/ 2>/dev/null || echo ".medusa/server/public not found" && \
+    find .medusa -name "index.html" -type f 2>/dev/null || echo "No index.html found in .medusa"
 
 # Expose port
 EXPOSE 9000
