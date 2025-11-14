@@ -25,5 +25,5 @@ RUN npm run build
 EXPOSE 9000
 
 # Start the application (run migrations first, then start server)
-CMD ["sh", "-c", "npx medusa migrations run && npm start"]
+CMD ["sh", "-c", "npx medusa db:migrate && npm start"]
 
