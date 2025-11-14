@@ -24,6 +24,6 @@ RUN npm run build
 # Expose port
 EXPOSE 9000
 
-# Start the application
-CMD ["npm", "start"]
+# Start the application (run migrations first, then start server)
+CMD ["sh", "-c", "npx medusa migrations run && npm start"]
 
