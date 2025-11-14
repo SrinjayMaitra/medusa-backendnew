@@ -18,8 +18,11 @@ COPY . .
 # Set NODE_ENV for build
 ENV NODE_ENV=production
 
-# Build the application (force rebuild, don't use cache for this step)
-RUN --no-cache npm run build
+# Add a cache-busting step to force rebuild (change this comment to invalidate cache)
+# Cache bust: 2025-11-14
+
+# Build the application
+RUN npm run build
 
 # Debug: Check what was built
 RUN echo "=== Checking build output ===" && \
