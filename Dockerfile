@@ -24,19 +24,23 @@ ENV NODE_ENV=production
 # Build the application
 RUN npm run build
 
-# Debug: Check what was built
+# Debug: Check what was built and fix admin build location
 RUN echo "=== Checking build output ===" && \
     echo "Current directory:" && pwd && \
-    echo "=== .medusa directory ===" && \
-    (ls -la .medusa/ 2>/dev/null || echo ".medusa directory not found") && \
-    echo "=== .medusa/server directory ===" && \
-    (ls -la .medusa/server/ 2>/dev/null || echo ".medusa/server not found") && \
-    echo "=== .medusa/server/public directory ===" && \
-    (ls -la .medusa/server/public/ 2>/dev/null || echo ".medusa/server/public not found") && \
     echo "=== Searching for index.html ===" && \
     (find .medusa -name "index.html" -type f 2>/dev/null || echo "No index.html found in .medusa") && \
-    echo "=== All .medusa files ===" && \
-    (find .medusa -type f 2>/dev/null | head -20 || echo "No files found in .medusa")
+    echo "=== .medusa/server/public structure ===" && \
+    (ls -laR .medusa/server/public/ 2>/dev/null | head -50 || echo ".medusa/server/public not found") && \
+    echo "=== Fixing admin build location ===" && \
+    (if [ -f .medusa/server/public/admin/index.html ]; then \
+        echo "Found index.html in admin subdirectory, copying to public root" && \
+        cp .medusa/server/public/admin/index.html .medusa/server/public/index.html && \
+        echo "✅ index.html copied to expected location"; \
+    elif [ -f .medusa/server/public/index.html ]; then \
+        echo "✅ index.html already in correct location"; \
+    else \
+        echo "⚠️ index.html not found, but continuing build"; \
+    fi)
 
 # Expose port
 EXPOSE 9000
