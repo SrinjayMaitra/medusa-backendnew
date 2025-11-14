@@ -11,6 +11,14 @@ module.exports = defineConfig({
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
-    }
+      // Cookie options for Railway/production
+      cookieOptions: {
+        secure: process.env.NODE_ENV === 'production' || process.env.TRUST_PROXY === 'true',
+        sameSite: 'lax',
+        httpOnly: true,
+      },
+    },
+    // Trust proxy for Railway (handles X-Forwarded headers)
+    trustProxy: process.env.TRUST_PROXY === 'true' || process.env.NODE_ENV === 'production',
   }
 })

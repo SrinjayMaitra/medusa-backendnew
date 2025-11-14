@@ -4,6 +4,7 @@
 /uploads
 /node_modules
 yarn-error.log
+npm-debug.log*
 
 .idea
 
@@ -24,3 +25,6 @@ build
 !.yarn/versions
 
 .medusa
+
+# Yarn lock file (using npm instead)
+yarn.lock
