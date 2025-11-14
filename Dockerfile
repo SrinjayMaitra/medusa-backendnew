@@ -21,6 +21,9 @@ ENV NODE_ENV=production
 # Build the application
 RUN npm run build
 
+# Verify admin build output exists
+RUN test -f .medusa/server/public/index.html || (echo "ERROR: Admin build failed - index.html not found" && exit 1)
+
 # Expose port
 EXPOSE 9000
 
