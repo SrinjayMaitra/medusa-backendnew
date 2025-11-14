@@ -13,7 +13,5 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
-    // Trust proxy for Railway (handles X-Forwarded headers)
-    trustProxy: process.env.TRUST_PROXY === 'true' || process.env.NODE_ENV === 'production',
   }
 })
