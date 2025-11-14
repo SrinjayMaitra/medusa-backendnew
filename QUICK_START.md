@@ -47,7 +47,7 @@ NODE_ENV=development
 ### 3. Run Database Migrations
 
 ```powershell
-npx medusa migrations run
+npx medusa db:migrate
 ```
 
 ### 4. Create Admin User

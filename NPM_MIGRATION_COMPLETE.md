@@ -51,7 +51,7 @@ cd medusabackend/medusa-backendnew
 npm install
 
 # Run migrations
-npx medusa migrations run
+npx medusa db:migrate
 
 # Create admin user
 npm run create-admin
@@ -82,7 +82,7 @@ The Dockerfile will automatically:
 | Start production | `npm start` |
 | Create admin user | `npm run create-admin` |
 | Seed demo data | `npm run seed` |
-| Run migrations | `npx medusa migrations run` |
+| Run migrations | `npx medusa db:migrate` |
 
 ---
 

@@ -25,11 +25,11 @@ Error starting server
 **Updated Dockerfile to run migrations before starting the server:**
 
 ```dockerfile
-CMD ["sh", "-c", "npx medusa migrations run && if [ -f yarn.lock ]; then yarn start; else npm start; fi"]
+CMD ["sh", "-c", "npx medusa db:migrate && npm start"]
 ```
 
 **What this does:**
-1. Runs `npx medusa migrations run` to create all database tables
+1. Runs `npx medusa db:migrate` to create all database tables
 2. Then starts the Medusa server
 3. If migrations fail, the server won't start (prevents errors)
 
@@ -107,11 +107,11 @@ If you need to run migrations manually on Railway:
 
 ```powershell
 # Using Railway CLI
-railway run npx medusa migrations run
+railway run npx medusa db:migrate
 
 # Or via Railway web console
 # Go to: Service → Deployments → Latest → Shell
-# Run: npx medusa migrations run
+# Run: npx medusa db:migrate
 ```
 
 ---

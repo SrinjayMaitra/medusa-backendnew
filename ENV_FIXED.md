@@ -67,7 +67,7 @@ Get-Service | Where-Object {$_.Name -like "*postgres*"}
 
 ```powershell
 cd medusabackend/medusa-backendnew
-npx medusa migrations run
+   npx medusa db:migrate
 ```
 
 **Should complete without errors!**
@@ -121,7 +121,7 @@ Start-Service -Name postgresql-x64-XX
 1. **Test connection** (see above)
 2. **Run migrations:**
    ```powershell
-   npx medusa migrations run
+   npx medusa db:migrate
    ```
 3. **Create admin user:**
    ```powershell

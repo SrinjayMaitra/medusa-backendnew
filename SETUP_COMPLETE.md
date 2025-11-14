@@ -48,7 +48,7 @@ npm install
 
 # 2. Create .env file (copy from QUICK_START.md)
 # 3. Run migrations
-npx medusa migrations run
+npx medusa db:migrate
 
 # 4. Create admin user
 npm run create-admin
@@ -132,7 +132,7 @@ Before deploying to Railway:
 npm install
 
 # Run migrations
-npx medusa migrations run
+npx medusa db:migrate
 
 # Create admin user
 npm run create-admin

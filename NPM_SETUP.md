@@ -66,7 +66,7 @@ npm run seed         # Seed demo data
 
 ### Medusa CLI
 ```powershell
-npx medusa migrations run
+npx medusa db:migrate
 npx medusa user -e admin@medusa.com -p test123
 ```
 
