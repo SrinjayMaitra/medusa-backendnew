@@ -18,15 +18,22 @@ COPY . .
 # Set NODE_ENV for build
 ENV NODE_ENV=production
 
-# Build the application
-RUN npm run build
+# Build the application (force rebuild, don't use cache for this step)
+RUN --no-cache npm run build
 
 # Debug: Check what was built
 RUN echo "=== Checking build output ===" && \
-    ls -la .medusa/ 2>/dev/null || echo ".medusa directory not found" && \
-    ls -la .medusa/server/ 2>/dev/null || echo ".medusa/server not found" && \
-    ls -la .medusa/server/public/ 2>/dev/null || echo ".medusa/server/public not found" && \
-    find .medusa -name "index.html" -type f 2>/dev/null || echo "No index.html found in .medusa"
+    echo "Current directory:" && pwd && \
+    echo "=== .medusa directory ===" && \
+    (ls -la .medusa/ 2>/dev/null || echo ".medusa directory not found") && \
+    echo "=== .medusa/server directory ===" && \
+    (ls -la .medusa/server/ 2>/dev/null || echo ".medusa/server not found") && \
+    echo "=== .medusa/server/public directory ===" && \
+    (ls -la .medusa/server/public/ 2>/dev/null || echo ".medusa/server/public not found") && \
+    echo "=== Searching for index.html ===" && \
+    (find .medusa -name "index.html" -type f 2>/dev/null || echo "No index.html found in .medusa") && \
+    echo "=== All .medusa files ===" && \
+    (find .medusa -type f 2>/dev/null | head -20 || echo "No files found in .medusa")
 
 # Expose port
 EXPOSE 9000
